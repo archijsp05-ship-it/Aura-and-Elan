@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AURA & ÉLAN | Haute Fashion, Beauté & Milestone Logistics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header & Navigation -->
+  <header class="site-header">
+    <div class="announcement-bar">
+      <div class="container announcement-inner">
+        <span>✨ Pan-India Milestone Delivery • Use Code <strong>AURA10</strong> for 10% Off • Zero Live GPS Tracking</span>
+        <button id="toggle-admin-btn" class="badge-btn">Switch to Admin Mode</button>
+      </div>
+    </div>
+    <div class="container nav-main">
+      <div class="brand-logo" onclick="switchTab('home')">
+        <span class="brand-name">AURA & ÉLAN</span>
+        <span class="brand-sub">Haute Mode • Beauté • Logistique</span>
+      </div>
+      <nav class="nav-links">
+        <button class="nav-btn active" onclick="switchTab('home')">Home</button>
+        <button class="nav-btn" onclick="switchTab('clothing')">Clothing</button>
+        <button class="nav-btn" onclick="switchTab('accessories')">Accessories</button>
+        <button class="nav-btn" onclick="switchTab('beauty')">Makeup & Beauté</button>
+        <button class="nav-btn highlight" onclick="switchTab('complete-look')">Complete My Look</button>
+        <button class="nav-btn ai-badge" onclick="switchTab('ai-studio')">AI Studio</button>
+        <button class="nav-btn" onclick="switchTab('orders')">My Orders</button>
+        <button class="nav-btn admin-link" id="nav-admin-link" style="display:none;" onclick="switchTab('admin')">Admin Portal</button>
+      </nav>
+      <div class="nav-actions">
+        <button class="action-icon-btn" onclick="switchTab('wishlist')" title="Wishlist">
+          ❤️ <span id="wishlist-badge" class="action-badge">2</span>
+        </button>
+        <button class="action-icon-btn" onclick="toggleCartDrawer(true)" title="Shopping Bag">
+          🛍️ <span id="cart-badge" class="action-badge">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main View Router Container -->
+  <main id="app-viewport">
+    <!-- Home View -->
+    <section id="view-home" class="view-panel active">
+      <div class="hero-section">
+        <div class="container hero-grid">
+          <div class="hero-text">
+            <span class="pill-tag">Festive Autumn 2026 Capsule</span>
+            <h1>Effortless Opulence, <br><em>Tailored for You.</em></h1>
+            <p>Curated luxury clothing, handcrafted Italian leather satchels, and clean beauty formulas with private milestone delivery tracking.</p>
+            <div class="hero-actions">
+              <button class="btn btn-primary" onclick="switchTab('clothing')">Explore Collection</button>
+              <button class="btn btn-secondary" onclick="openTryOnModal('prod-dress-01')">Try Virtual Fitting</button>
+            </div>
+            <div class="hero-perks">
+              <span>🔒 Zero Live GPS Tracking</span>
+              <span>📦 15-Day Pan-India Returns</span>
+              <span>✨ 100% Authentic Luxury</span>
+            </div>
+          </div>
+          <div class="hero-image-wrap">
+            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=1000&q=80" alt="Emerald Bias Dress" class="hero-img">
+            <div class="hero-float-card" onclick="openProductModal('prod-beauty-lip-01')">
+              <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=300&q=80" alt="Velvet Lipstick">
+              <div>
+                <span class="sub-label">Clean Beauté</span>
+                <strong>Velvet Cashmere Lipstick</strong>
+                <span>₹1,490</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Showcase -->
+      <div class="container section-spacing">
+        <div class="section-header text-center">
+          <span class="section-tag">Departments</span>
+          <h2>Curated For Every Occasion</h2>
+        </div>
+        <div class="departments-grid">
+          <div class="dept-card" onclick="switchTab('clothing')">
+            <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&w=800&q=80" alt="Clothing">
+            <div class="dept-overlay">
+              <span>9 Collections</span>
+              <h3>Haute Clothing</h3>
+              <p>Bias-cut silks, tailored wool blazers & heritage Chanderi</p>
+            </div>
+          </div>
+          <div class="dept-card" onclick="switchTab('accessories')">
+            <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=80" alt="Accessories">
+            <div class="dept-overlay">
+              <span>7 Collections</span>
+              <h3>Luxury Accessories</h3>
+              <p>Full-grain leather satchels, baroque pearls & UV shades</p>
+            </div>
+          </div>
+          <div class="dept-card" onclick="switchTab('beauty')">
+            <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=800&q=80" alt="Beauty">
+            <div class="dept-overlay">
+              <span>8 Collections</span>
+              <h3>Makeup & Clean Beauté</h3>
+              <p>Hyaluronic velvet lipsticks, serum skin tints & botanicals</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trending Grid -->
+      <div class="container section-spacing">
+        <div class="section-header flex-between">
+          <div>
+            <span class="section-tag">Curated Selections</span>
+            <h2>Trending This Season</h2>
+          </div>
+          <button class="link-btn" onclick="switchTab('clothing')">View All Pieces →</button>
+        </div>
+        <div id="home-trending-grid" class="products-grid"></div>
+      </div>
+
+      <!-- Private Milestone Tracking Showcase -->
+      <div class="container section-spacing">
+        <div class="tracking-feature-banner">
+          <div class="tracking-feature-text">
+            <span class="pill-tag dark">The AURA & ÉLAN Signature</span>
+            <h2>Private Milestone Delivery.<br><em>Zero Intrusive Tracking.</em></h2>
+            <p>Unlike ordinary tracking pages that broadcast live driver GPS coordinates on a moving map, our system focuses on genuine, verified milestones: Shipped, Reached Nearest Hub, Out for Delivery, and Verified OTP Handover.</p>
+            <div class="feature-badges">
+              <div>🚫 <strong>No Live GPS Maps:</strong> Courier dignity and customer safety are protected.</div>
+              <div>📍 <strong>Verified Checkpoints:</strong> Genuine milestone scans from our partner sorting hubs.</div>
+            </div>
+            <button class="btn btn-light" onclick="openTrackingModal('ord-seed-001')">Preview Milestone Timeline Demo</button>
+          </div>
+          <div class="tracking-sample-card">
+            <h4>Verified Checkpoints (Order #AE-89421)</h4>
+            <ul class="sample-timeline">
+              <li class="done">✓ Order Placed & Verified • 20 Oct</li>
+              <li class="done">✓ Shipped via BlueDart Air Express • 21 Oct</li>
+              <li class="current">● Reached Nearest Hub: South Mumbai Central Hub • 23 Oct</li>
+              <li class="pending">○ Out for Delivery • Expected 24 Oct (Window: 2-5 PM)</li>
+              <li class="pending">○ Handover with Secure OTP: 7482</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Catalog View -->
+    <section id="view-catalog" class="view-panel">
+      <div class="container section-spacing">
+        <div class="catalog-header">
+          <div>
+            <span class="section-tag">Boutique Store</span>
+            <h1 id="catalog-title">All Fashion & Beauty</h1>
+          </div>
+          <div class="filter-controls">
+            <input type="text" id="catalog-search" placeholder="Search pieces or shades..." oninput="handleCatalogFilter()">
+            <select id="catalog-sort" onchange="handleCatalogFilter()">
+              <option value="featured">Featured Curations</option>
+              <option value="price-low">Price: Low to High</option>
+              <option value="price-high">Price: High to Low</option>
+              <option value="rating">Highest Rated</option>
+            </select>
+          </div>
+        </div>
+        <div class="catalog-layout">
+          <aside class="catalog-sidebar">
+            <div class="sidebar-box">
+              <h4>Departments</h4>
+              <ul class="filter-list">
+                <li><button class="filter-btn active" onclick="setCatalogCategory('all')">All Departments</button></li>
+                <li><button class="filter-btn" onclick="setCatalogCategory('clothing')">Clothing</button></li>
+                <li><button class="filter-btn" onclick="setCatalogCategory('accessories')">Accessories</button></li>
+                <li><button class="filter-btn" onclick="setCatalogCategory('beauty')">Makeup & Beauté</button></li>
+              </ul>
+            </div>
+            <div class="sidebar-box">
+              <h4>Max Price: <span id="price-val">₹12,000</span></h4>
+              <input type="range" id="price-slider" min="1000" max="12000" step="500" value="12000" oninput="handleCatalogFilter()">
+            </div>
+            <div class="sidebar-box">
+              <h4>Complexion Undertone</h4>
+              <div class="undertone-chips">
+                <button class="chip-btn active" onclick="setUndertoneFilter('all')">All</button>
+                <button class="chip-btn" onclick="setUndertoneFilter('warm')">Warm</button>
+                <button class="chip-btn" onclick="setUndertoneFilter('cool')">Cool</button>
+                <button class="chip-btn" onclick="setUndertoneFilter('neutral')">Neutral</button>
+                <button class="chip-btn" onclick="setUndertoneFilter('olive')">Olive</button>
+              </div>
+            </div>
+          </aside>
+          <div id="catalog-products-grid" class="products-grid main-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Complete My Look View -->
+    <section id="view-complete-look" class="view-panel">
+      <div class="container section-spacing">
+        <div class="section-header text-center">
+          <span class="section-tag">Atelier Harmonizer</span>
+          <h1>Complete My Look</h1>
+          <p>Head-to-toe coordinated ensembles with an automatic 15% bundle discount.</p>
+        </div>
+        <div class="look-builder-card">
+          <div class="look-info">
+            <span class="pill-tag">Cocktail & Gala Evening</span>
+            <h2>Emerald Soirée & Baroque Pearls</h2>
+            <p>The fluid Japanese silk-satin bias midi dress paired with baroque pearl drop earrings, an Italian cognac calfskin satchel, and velvet cashmere crimson lips.</p>
+            <div class="bundle-summary">
+              <div><span>Bundle Savings (15%):</span> <strong id="look-discount">₹1,560</strong></div>
+              <div><span>Total Ensemble:</span> <strong id="look-total" class="price-highlight">₹8,837</strong></div>
+            </div>
+            <button class="btn btn-primary" onclick="addCompleteLookToCart()">Add Entire Ensemble to Bag (15% Off)</button>
+          </div>
+          <div id="look-items-grid" class="look-items-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AI Studio View -->
+    <section id="view-ai-studio" class="view-panel">
+      <div class="container section-spacing">
+        <div class="section-header text-center">
+          <span class="section-tag">Haute Intelligence</span>
+          <h1>The ÉLAN AI Innovation Studio</h1>
+          <p>Three purpose-built technologies to eliminate sizing uncertainty and perfect cosmetic undertone matching.</p>
+        </div>
+        <div class="ai-cards-grid">
+          <div class="ai-card">
+            <div class="ai-icon">👗</div>
+            <h3>Virtual Try-On Fitting</h3>
+            <p>Upload a photograph or select diverse models. Gemini AI evaluates fabric drape, silhouette proportions, and color harmony.</p>
+            <button class="btn btn-secondary" onclick="openTryOnModal('prod-dress-01')">Launch Virtual Fitting</button>
+          </div>
+          <div class="ai-card">
+            <div class="ai-icon">📏</div>
+            <h3>Smart Size Assistant</h3>
+            <p>Enter your height, bust, waist, and hips. Evaluated against brand-specific tailoring tolerances to recommend your optimal size.</p>
+            <button class="btn btn-secondary" onclick="openSizeAssistantModal('prod-shirt-01')">Calculate Tailored Size</button>
+          </div>
+          <div class="ai-card">
+            <div class="ai-icon">💄</div>
+            <h3>Makeup Shade Harmonizer</h3>
+            <p>Detect skin undertones (golden, cool, neutral, or olive) to match second-skin foundations and velvety lip pigments.</p>
+            <button class="btn btn-secondary" onclick="openShadeFinderModal('prod-beauty-foundation-01')">Find My Shade</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Orders View -->
+    <section id="view-orders" class="view-panel">
+      <div class="container section-spacing">
+        <div class="section-header">
+          <span class="section-tag">Verified Deliveries</span>
+          <h1>My Orders & Milestone Shipments</h1>
+          <p>Verified checkpoints from boutique preparation to doorstep handover. Zero live driver GPS broadcast.</p>
+        </div>
+        <div id="orders-list-container" class="orders-list"></div>
+      </div>
+    </section>
+
+    <!-- Wishlist View -->
+    <section id="view-wishlist" class="view-panel">
+      <div class="container section-spacing">
+        <div class="section-header">
+          <span class="section-tag">Private Atelier</span>
+          <h1>Saved Wishlist & Price Alerts</h1>
+          <p>Track dream pieces and receive instant alerts when items drop to your target price.</p>
+        </div>
+        <div id="wishlist-grid" class="products-grid"></div>
+      </div>
+    </section>
+
+    <!-- Admin Portal View -->
+    <section id="view-admin" class="view-panel">
+      <div class="container section-spacing">
+        <div class="admin-banner">
+          <div>
+            <span class="pill-tag dark">Boutique Operations Portal</span>
+            <h2>Logistics Milestone & Alerts Sandbox</h2>
+            <p>Advance verified shipment checkpoints and trigger simulated price drop/restock events.</p>
+          </div>
+        </div>
+        <div class="admin-grid">
+          <div class="admin-box">
+            <h3>Advance Shipment Milestone</h3>
+            <p class="sub-text">Updates customer timeline without driver GPS coordinates.</p>
+            <label>Select Order:</label>
+            <select id="admin-order-select"></select>
+            <label>Set Milestone Checkpoint:</label>
+            <select id="admin-milestone-select">
+              <option value="ORDER_PLACED">1. Order Placed</option>
+              <option value="ORDER_CONFIRMED">2. Order Confirmed</option>
+              <option value="PREPARING_SHIPMENT">3. Preparing for Shipment</option>
+              <option value="SHIPPED">4. Shipped (Air Express)</option>
+              <option value="REACHED_NEAREST_HUB">5. Reached Nearest Delivery Hub</option>
+              <option value="OUT_FOR_DELIVERY">6. Out for Delivery</option>
+              <option value="DELIVERED">7. Delivered (OTP Verified)</option>
+            </select>
+            <label>Sorting Facility Name:</label>
+            <input type="text" id="admin-facility-input" value="South Mumbai Central Sorting Facility">
+            <button class="btn btn-primary" onclick="adminAdvanceMilestone()">Broadcast Milestone Checkpoint</button>
+          </div>
+          <div class="admin-box">
+            <h3>Simulate Price Drop Event</h3>
+            <p class="sub-text">Immediately notifies customers who configured a target price alert.</p>
+            <label>Select Product:</label>
+            <select id="admin-price-drop-select"></select>
+            <label>Discounted Price (₹):</label>
+            <input type="number" id="admin-price-input" value="3990">
+            <button class="btn btn-secondary" onclick="adminTriggerPriceDrop()">Fire Price Drop Alert</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Product Detail Modal -->
+  <div id="modal-product" class="modal-backdrop">
+    <div class="modal-dialog large">
+      <button class="modal-close" onclick="closeModal('modal-product')">&times;</button>
+      <div id="modal-product-content" class="pdp-modal-grid"></div>
+    </div>
+  </div>
+
+  <!-- Virtual Try-On Modal -->
+  <div id="modal-tryon" class="modal-backdrop">
+    <div class="modal-dialog large">
+      <button class="modal-close" onclick="closeModal('modal-tryon')">&times;</button>
+      <div class="modal-header">
+        <h2>Virtual Try-On & Drape Studio</h2>
+        <span class="pill-tag">Gemini 3.8 Flash Fit Consultant</span>
+      </div>
+      <div class="tryon-grid">
+        <div class="tryon-preview-box">
+          <div class="compare-container">
+            <div class="compare-side">
+              <img id="tryon-wearer-img" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" alt="Wearer">
+              <span class="badge">Reference Wearer</span>
+            </div>
+            <div class="compare-side">
+              <img id="tryon-garment-img" src="" alt="Garment">
+              <span class="badge">Garment Drape</span>
+            </div>
+          </div>
+          <div id="tryon-ai-verdict" class="ai-verdict-card">
+            <h4>Haute Silhouette Evaluation</h4>
+            <p id="tryon-verdict-text">Analyzing fabric weight, shoulder alignment, and silhouette contour...</p>
+          </div>
+        </div>
+        <div class="tryon-controls">
+          <label>Select Wearer Model:</label>
+          <div class="model-presets">
+            <button onclick="setTryOnModel('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80')">Model A (5'7")</button>
+            <button onclick="setTryOnModel('https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=600&q=80')">Model B (5'5")</button>
+            <button onclick="setTryOnModel('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=600&q=80')">Model C (5'9")</button>
+          </div>
+          <label>Upload Your Own Photo:</label>
+          <input type="file" id="tryon-upload-input" accept="image/*" onchange="handleTryOnUpload(event)">
+          <div class="privacy-note">
+            🔒 <strong>Privacy Guarantee:</strong> Uploaded images are processed ephemerally in-session and never stored permanently.
+          </div>
+          <button class="btn btn-primary full-width" onclick="runTryOnAnalysis()">Generate Fitting Evaluation</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Smart Size Assistant Modal -->
+  <div id="modal-size" class="modal-backdrop">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeModal('modal-size')">&times;</button>
+      <div class="modal-header">
+        <h2>Smart Size Assistant</h2>
+        <span class="pill-tag">Brand Tolerances</span>
+      </div>
+      <form onsubmit="handleSizeCalculation(event)" class="size-form">
+        <div class="form-row">
+          <div>
+            <label>Bust / Chest (Inches):</label>
+            <input type="number" id="size-chest" value="36" required>
+          </div>
+          <div>
+            <label>Natural Waist (Inches):</label>
+            <input type="number" id="size-waist" value="28" required>
+          </div>
+          <div>
+            <label>Hips (Inches):</label>
+            <input type="number" id="size-hips" value="38" required>
+          </div>
+        </div>
+        <label>Silhouette Preference:</label>
+        <div class="fit-pref-row">
+          <label><input type="radio" name="fit-pref" value="slim"> Slim Contour</label>
+          <label><input type="radio" name="fit-pref" value="regular" checked> Regular Tailored</label>
+          <label><input type="radio" name="fit-pref" value="relaxed"> Relaxed Movement</label>
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Calculate Recommended Size</button>
+      </form>
+      <div id="size-result-card" class="size-result-card" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- Shade Finder Modal -->
+  <div id="modal-shade" class="modal-backdrop">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeModal('modal-shade')">&times;</button>
+      <div class="modal-header">
+        <h2>ÉLAN Beauté Shade Finder</h2>
+        <span class="pill-tag">Colorimetry Harmonizer</span>
+      </div>
+      <div class="shade-finder-body">
+        <label>Select Undertone:</label>
+        <div class="undertone-selector">
+          <button class="chip-btn active" onclick="setShadeUndertone('warm')">Warm (Golden/Peach)</button>
+          <button class="chip-btn" onclick="setShadeUndertone('cool')">Cool (Rosy/Pink)</button>
+          <button class="chip-btn" onclick="setShadeUndertone('neutral')">Neutral (Balanced)</button>
+          <button class="chip-btn" onclick="setShadeUndertone('olive')">Olive (Golden-Earthy)</button>
+        </div>
+        <label>Select Complexion Depth:</label>
+        <div class="undertone-selector">
+          <button class="chip-btn" onclick="setShadeDepth('fair')">Fair</button>
+          <button class="chip-btn" onclick="setShadeDepth('light')">Light</button>
+          <button class="chip-btn active" onclick="setShadeDepth('medium')">Medium</button>
+          <button class="chip-btn" onclick="setShadeDepth('tan')">Tan</button>
+          <button class="chip-btn" onclick="setShadeDepth('deep')">Deep</button>
+        </div>
+        <button class="btn btn-primary full-width" onclick="calculateShadeMatches()">Match Foundation & Lip Shades</button>
+        <div id="shade-match-results" class="shade-results-box" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Milestone Tracking Timeline Modal -->
+  <div id="modal-tracking" class="modal-backdrop">
+    <div class="modal-dialog large">
+      <button class="modal-close" onclick="closeModal('modal-tracking')">&times;</button>
+      <div class="tracking-modal-header">
+        <div class="privacy-pill">🔒 Verified Milestone Tracking • Zero Live GPS</div>
+        <h2 id="track-order-num">Order #AE-89421</h2>
+        <p id="track-meta">Placed on 20 Oct 2026 • Courier: BlueDart Air Express</p>
+      </div>
+      <div class="tracking-summary-bar">
+        <div>
+          <span class="sub-label">Expected Delivery</span>
+          <strong id="track-delivery-date">24 Oct 2026</strong>
+          <span id="track-delivery-window" class="dim">Estimated window: 2:00 PM - 5:00 PM</span>
+        </div>
+        <div class="otp-card">
+          <span class="sub-label">Secure Delivery OTP</span>
+          <div id="track-otp" class="otp-number">7482</div>
+          <span class="dim">Share with courier at doorstep</span>
+        </div>
+      </div>
+      <div class="milestones-container">
+        <h3>Verified Shipment Checkpoints</h3>
+        <div id="milestones-timeline-list" class="milestones-timeline"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Return / Exchange Modal -->
+  <div id="modal-return" class="modal-backdrop">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeModal('modal-return')">&times;</button>
+      <div class="modal-header">
+        <h2>Request Return or Exchange</h2>
+        <span class="pill-tag">15-Day Policy</span>
+      </div>
+      <form onsubmit="handleReturnSubmit(event)" class="return-form">
+        <div id="return-item-preview" class="return-item-preview"></div>
+        <label>Request Type:</label>
+        <div class="fit-pref-row">
+          <label><input type="radio" name="return-type" value="return" checked> Return for Refund</label>
+          <label><input type="radio" name="return-type" value="exchange"> Exchange for Size</label>
+        </div>
+        <label>Reason:</label>
+        <select id="return-reason">
+          <option>Size too large / too small</option>
+          <option>Fabric or color tone mismatch</option>
+          <option>Damaged or defective item</option>
+          <option>Changed mind</option>
+        </select>
+        <label>Additional Notes:</label>
+        <textarea id="return-comment" rows="2" placeholder="Details for our quality concierge..."></textarea>
+        <div class="privacy-note">
+          <input type="checkbox" id="return-hygiene-check" required>
+          <span>I certify that this piece is unworn, unwashed, with security ribbons intact.</span>
+        </div>
+        <button type="submit" class="btn btn-primary full-width">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <aside id="cart-drawer" class="cart-drawer">
+    <div class="cart-drawer-header">
+      <h3>Shopping Bag (<span id="cart-count-label">0</span>)</h3>
+      <button class="close-btn" onclick="toggleCartDrawer(false)">&times;</button>
+    </div>
+    <div id="cart-items-container" class="cart-items-list"></div>
+    <div class="cart-drawer-footer">
+      <div class="voucher-box">
+        <input type="text" id="voucher-input" placeholder="Voucher: AURA10">
+        <button class="btn btn-secondary" onclick="applyVoucher()">Apply</button>
+      </div>
+      <div class="cart-totals">
+        <div><span>Subtotal:</span> <strong id="cart-subtotal">₹0</strong></div>
+        <div id="cart-discount-row" style="display:none; color:#2E7D32;"><span>Voucher Discount:</span> <strong id="cart-discount">-₹0</strong></div>
+        <div><span>Shipping:</span> <strong id="cart-shipping">Free</strong></div>
+        <div><span>Estimated GST (5%):</span> <strong id="cart-tax">₹0</strong></div>
+        <div class="grand-total"><span>Total Amount:</span> <strong id="cart-grandtotal">₹0</strong></div>
+      </div>
+      <button class="btn btn-primary full-width" onclick="openCheckoutModal()">Proceed to Checkout</button>
+    </div>
+  </aside>
+
+  <!-- Checkout Modal -->
+  <div id="modal-checkout" class="modal-backdrop">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeModal('modal-checkout')">&times;</button>
+      <div class="modal-header">
+        <h2>Secure Checkout</h2>
+        <span class="pill-tag">256-Bit Encryption</span>
+      </div>
+      <form onsubmit="handlePlaceOrder(event)" class="checkout-form">
+        <h4>1. Delivery Address</h4>
+        <div class="form-row">
+          <div><label>Name:</label><input type="text" id="chk-name" value="Priya Sharma" required></div>
+          <div><label>Phone:</label><input type="text" id="chk-phone" value="+91 98201 54321" required></div>
+        </div>
+        <label>Street Address:</label>
+        <input type="text" id="chk-street" value="402, Sea Green Heights, Worli Sea Face" required>
+        <div class="form-row">
+          <div><label>PIN Code:</label><input type="text" id="chk-pincode" value="400001" required></div>
+          <div><label>City:</label><input type="text" id="chk-city" value="Mumbai" required></div>
+        </div>
+        
+        <h4>2. Gift Mode</h4>
+        <div class="gift-mode-box">
+          <label><input type="checkbox" id="chk-is-gift" onchange="toggleGiftFields()"> Mark this order as a Gift</label>
+          <div id="gift-fields" style="display:none; margin-top:8px;">
+            <input type="text" id="chk-gift-recipient" placeholder="Recipient's Name">
+            <textarea id="chk-gift-message" rows="2" placeholder="Personal message for gift card..."></textarea>
+            <label><input type="checkbox" id="chk-gift-wrap" checked> Luxury Gift Packaging (+₹99)</label>
+            <label><input type="checkbox" id="chk-gift-hide" checked> Hide product prices on invoice</label>
+          </div>
+        </div>
+
+        <h4>3. Payment Method</h4>
+        <div class="payment-methods">
+          <label><input type="radio" name="pay-method" value="upi" checked> UPI (GPay/PhonePe/QR)</label>
+          <label><input type="radio" name="pay-method" value="card"> Credit / Debit Card</label>
+          <label><input type="radio" name="pay-method" value="cod"> Cash on Delivery (COD)</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary full-width">Confirm Order & Launch Milestone Tracking</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <span class="brand-name">AURA & ÉLAN</span>
+        <p>Curating couture clothing, sculptural accessories, and clean beauty with ethical AI tools and private milestone delivery tracking across India.</p>
+      </div>
+      <div>
+        <h4>Departments</h4>
+        <ul>
+          <li><a href="#" onclick="switchTab('clothing')">Clothing & Silks</a></li>
+          <li><a href="#" onclick="switchTab('accessories')">Leather Satchels</a></li>
+          <li><a href="#" onclick="switchTab('beauty')">Clean Beauté & Lips</a></li>
+          <li><a href="#" onclick="switchTab('complete-look')">Complete My Look</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>AI Innovations</h4>
+        <ul>
+          <li><a href="#" onclick="switchTab('ai-studio')">Virtual Try-On Room</a></li>
+          <li><a href="#" onclick="switchTab('ai-studio')">Smart Size Tailor</a></li>
+          <li><a href="#" onclick="switchTab('ai-studio')">Makeup Shade Finder</a></li>
+          <li><a href="#" onclick="switchTab('orders')">Private Milestone Tracking</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Concierge</h4>
+        <p>Email: concierge@auraelan.com<br>Phone: +91 (022) 8490-1284</p>
+        <p class="dim">BlueDart Air Express • 256-Bit SSL</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
