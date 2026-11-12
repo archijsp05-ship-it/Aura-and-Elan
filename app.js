@@ -1,8 +1,3 @@
-/* ========================================================
-   AURA & ÉLAN - JAVASCRIPT APPLICATION CORE
-   ======================================================== */
-
-// --- 1. PRODUCT CATALOG DATA ---
 const PRODUCTS = [
   {
     id: 'prod-dress-01',
@@ -122,7 +117,6 @@ const PRODUCTS = [
   }
 ];
 
-// --- 2. GLOBAL STATE ---
 let cart = [];
 let wishlist = ['prod-dress-01', 'prod-beauty-lip-01'];
 let activeVoucher = null;
@@ -130,7 +124,6 @@ let isAdminMode = false;
 let activeCategoryFilter = 'all';
 let activeUndertoneFilter = 'all';
 
-// Seed Orders with Verified Milestones
 let orders = [
   {
     id: 'ord-seed-001',
@@ -160,7 +153,6 @@ let orders = [
   }
 ];
 
-// --- 3. INITIALIZATION ---
 document.addEventListener('DOMContentLoaded', () => {
   renderHomeTrending();
   renderCatalog();
@@ -178,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// --- 4. VIEW ROUTER ---
 function switchTab(tabId) {
   document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
@@ -197,7 +188,6 @@ function switchTab(tabId) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// --- 5. RENDER FUNCTIONS ---
 function renderHomeTrending() {
   const container = document.getElementById('home-trending-grid');
   container.innerHTML = PRODUCTS.slice(0, 4).map(p => createProductCardHTML(p)).join('');
@@ -423,7 +413,6 @@ function toggleWishlist(id) {
   renderWishlist();
 }
 
-// --- 7. SPECIAL FEATURE: PRIVATE MILESTONE TRACKING ---
 function openTrackingModal(orderId) {
   const ord = orders.find(o => o.id === orderId) || orders[0];
   document.getElementById('track-order-num').textContent = `Order #${ord.orderNumber}`;
@@ -446,7 +435,6 @@ function openTrackingModal(orderId) {
   document.getElementById('modal-tracking').classList.add('active');
 }
 
-// --- 8. AI FEATURES (TRY-ON, SIZING, SHADES) ---
 let currentTryOnProductId = 'prod-dress-01';
 function openTryOnModal(prodId) {
   currentTryOnProductId = prodId;
@@ -539,7 +527,6 @@ function calculateShadeMatches() {
   `;
 }
 
-// --- 9. PRODUCT DETAIL MODAL ---
 function openProductModal(id) {
   const p = PRODUCTS.find(x => x.id === id);
   if (!p) return;
@@ -566,7 +553,6 @@ function openProductModal(id) {
   document.getElementById('modal-product').classList.add('active');
 }
 
-// --- 10. CHECKOUT & RETURNS ---
 function openCheckoutModal() {
   toggleCartDrawer(false);
   document.getElementById('modal-checkout').classList.add('active');
@@ -626,7 +612,6 @@ function handleReturnSubmit(e) {
   closeModal('modal-return');
 }
 
-// --- 11. ADMIN SANDBOX ENGINE ---
 function setupAdminOptions() {
   const orderSelect = document.getElementById('admin-order-select');
   if (orderSelect) {
